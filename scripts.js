@@ -15,3 +15,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const viewer = document.getElementById('photo-viewer');
+    const viewerImg = document.getElementById('photo-viewer-img');
+    const closeBtn = document.querySelector('.photo-viewer .close');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+
+    thumbnails.forEach(thumbnail => {
+        thumbnail.addEventListener('click', () => {
+            viewerImg.src = thumbnail.src;
+            viewer.style.display = 'block';
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        viewer.style.display = 'none';
+    });
+
+    viewer.addEventListener('click', (event) => {
+        if (event.target !== viewerImg && event.target !== closeBtn) {
+            viewer.style.display = 'none';
+        }
+    });
+});
