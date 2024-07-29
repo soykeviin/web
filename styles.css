@@ -14,8 +14,8 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #000;
-    color: #fff;
+    background-color: #000000;
+    color: #ffffff;
     padding: 10px 20px;
 }
 
@@ -32,7 +32,7 @@ header {
 }
 
 main {
-    background-color: #fff;
+    background-color: #ffffff; /* CAMBIAR COLORRRRRRRR GGG */
     width: 90%;
     max-width: 600px;
     margin-top: 20px;
@@ -111,10 +111,15 @@ main {
    margin-left: 38px;
    
 }
+
+/* VIDEOS AJUSTES */
+
+
+
 .video-container {
     display: flex;
     margin-left: 1px;
-    align-items: center; /* Centra los videos horizontalmente */
+    align-items: center;
     gap: 5px;
     margin-top: 20px; 
 }
@@ -123,4 +128,113 @@ main {
     width: 56%;
     height: auto;
     max-width: 400px;
+    cursor: pointer;
+}
+
+.video-viewer {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    padding: 0;
+    overflow: hidden; /* Asegura que el video no desborde el contenedor */
+}
+
+.video-viewer-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: block;
+    margin: auto;
+    outline: none; /* Elimina el borde del video */
+}
+
+.video-viewer .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1100;
+}
+
+
+
+/*prueba video */
+
+/* VIDEOS AJUSTES end */
+
+.posts img, .logo img {
+   
+    -webkit-user-drag: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.social-icons {
+    text-align: center;
+    margin: 20px 0;
+}
+.social-icons a {
+    margin: 0 8px;
+    color: #000;
+    font-size: 25px; /* Tamaño de los iconos */
+    text-decoration: none;
+}
+.social-icons a:hover {
+    color: #555; /* Cambio de color al pasar el cursor */
+}
+
+
+
+
+
+
+/** PRUEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA*/
+
+
+
+.posts {
+    display: flex;
+    gap: 10px;
+}
+
+.posts img {
+    width: 55%;
+    height: auto;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.photo-viewer {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: transparent;
+    padding: 0;
+}
+
+.photo-viewer-content {
+    max-width: 90vw;
+    max-height: 90vh;
+    display: block;
+    margin: auto;
+}
+
+.photo-viewer .close {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    z-index: 1100;
 }
