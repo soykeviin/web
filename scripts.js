@@ -1,42 +1,70 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const videos = document.querySelectorAll('.video');
+    const videos = document.querySelectorAll('.video-container video');
+    const photoViewer = document.getElementById('photo-viewer');
+    const photoViewerImg = document.getElementById('photo-viewer-img');
+    const closeBtn = document.querySelector('.photo-viewer .close');
+    const thumbnails = document.querySelectorAll('.thumbnail');
+    const toggleMuteVideos = document.querySelectorAll('.video.toggle-mute');
+
+    // Intersection Observer para videos
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            const video = entry.target;
+            if (entry.isIntersecting) {
+                video.play();
+            } else {
+                video.pause();
+            }
+        });
+    }, { threshold: 0.5 });
 
     videos.forEach(video => {
-        video.addEventListener('click', () => {
-            // Si el video está sonando, siléncialo
-            if (!video.muted) {
-                video.muted = true;
+        observer.observe(video);
+    });
+
+    // Manejo de mute/unmute solo para videos específicos
+    toggleMuteVideos.forEach(video => {
+        video.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Alternar estado de mute
+            video.muted = !video.muted;
+            
+            // Alternar clase para cambiar el ícono
+            if (video.muted) {
+                video.classList.remove('unmuted');
             } else {
-                // Si el video está en silencio, silencia todos los videos primero
-                videos.forEach(v => v.muted = true);
-                // Luego activa el sonido solo en el video clicado
-                video.muted = false;
+                video.classList.add('unmuted');
             }
         });
     });
-});
 
-
-document.addEventListener('DOMContentLoaded', () => {
-    const viewer = document.getElementById('photo-viewer');
-    const viewerImg = document.getElementById('photo-viewer-img');
-    const closeBtn = document.querySelector('.photo-viewer .close');
-    const thumbnails = document.querySelectorAll('.thumbnail');
-
+    // Manejo de imágenes
     thumbnails.forEach(thumbnail => {
         thumbnail.addEventListener('click', () => {
-            viewerImg.src = thumbnail.src;
-            viewer.style.display = 'block';
+            document.body.classList.add('no-scroll');
+            photoViewerImg.src = thumbnail.src;
+            photoViewer.style.display = 'block';
         });
     });
 
+    // Cerrar visor de foto
     closeBtn.addEventListener('click', () => {
-        viewer.style.display = 'none';
+        document.body.classList.remove('no-scroll');
+        photoViewer.style.display = 'none';
     });
 
-    viewer.addEventListener('click', (event) => {
-        if (event.target !== viewerImg && event.target !== closeBtn) {
-            viewer.style.display = 'none';
+    // Cerrar al hacer clic fuera de la imagen
+    photoViewer.addEventListener('click', (e) => {
+        if (e.target === photoViewer) {
+            document.body.classList.remove('no-scroll');
+            photoViewer.style.display = 'none';
         }
+    });
+
+    // Evitar que el clic en la imagen cierre el visor
+    photoViewerImg.addEventListener('click', (e) => {
+        e.stopPropagation();
     });
 });
